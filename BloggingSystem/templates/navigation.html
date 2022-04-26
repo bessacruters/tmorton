@@ -1,0 +1,99 @@
+<header>
+    <div class="wrapper bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 px-3 py-2 text-primary" id="datetime-box" style="font-size: 18px">
+            <!-- Javascript Display Time -->
+            <script>
+            display_ct();
+            function display_c(){
+            var refresh=1000; // Refresh rate in milli seconds
+            mytime=setTimeout('display_ct()',refresh)
+            }
+            function display_ct() {
+            var d = new Date();
+            var d = d.toString();
+            var d = d.substring(0, 24);
+  
+            document.getElementById("datetime-box").innerHTML = d;
+            display_c();
+            }
+            </script>
+  
+          </div>
+          <div class="col-sm-9">
+            <ul class="nav justify-content-end">
+
+                  {% if request.user.is_authenticated %}
+                    <div class='welcome-msg'> Welcome, {{request.user.first_name}} </div>
+
+                    <li class=" pl-3 py-1">
+                      <a class="btn btn-danger-custom py-1 px-3" href="/accounts/profile/{{request.user.id}}">My Profile</a>
+                    </li>
+
+                    <li class=" pl-3 py-1">
+                      <a class="btn btn-danger-custom py-1 px-3" href="/messages">Messages</a>
+                    </li>
+    
+                    <li class=" pl-3 py-1">
+                      <a class="btn btn-danger-custom py-1 px-3" href="/logout">Log Out</a>
+                    </li>
+                  {% else %}
+                    <li class=" pl-3 py-1">
+                      <a class="btn btn-danger-custom py-1 px-3" href="/accounts/login">Login</a>
+                    </li>
+                    <li class=" pl-3 py-1">
+                      <a class="btn btn-danger-custom py-1 px-3" href="/accounts/signup">Register</a>
+                    </li>
+                  {% endif %}
+
+                 
+
+
+                  <li class=" pl-3 py-1">
+                    <a class="btn btn-danger-custom py-1 px-3" href="/about">About Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="wrapper site-name">
+          <div class="container">
+            <div>
+              <a href="/"> <img class="logo" src="/static/images/logo.png" width="90px" height="" href="/"></a>
+              <span>
+                <a class="text-white site-branding" href="/" rel="home"> Tyler's Blog </a>
+              <span>
+            </div>
+          </div>
+        </div>
+
+
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="container">
+              <button class="btn-danger-custom navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <i class="fa fa-bars" style="font-size: 30px;" aria-hidden="true"></i>
+              </button>
+              <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                  </li>
+                  {% for item in categories %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/category/{{item.id}}">{{item.name}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+            </div>
+            <form class="form-inline right ml-auto mx-0" action="/search">
+              <input name="query" class="form-control mr-2 w-auto" type="text" placeholder="Search" required>
+              <button class="btn btn-danger-custom py-2" type="submit"><i class="fa fa-search search"></i></button>
+            </form>
+          </div>
+        </nav>
+      </header>
+      

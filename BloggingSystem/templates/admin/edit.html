@@ -1,0 +1,92 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+
+<div id="content" class="content">
+	<div class="content-heading">
+		<span> Manage Pages </span>
+		<a class="view-webiste-button" href="/" target="_blank"> <i class="fa fa-external-link-alt" aria-hidden="true"></i> View Public Webiste </a>
+	</div>
+	<div class="content-body">
+
+		<div class="submenu">
+			<a class="submenu-btn" href="/admin"> View All Pages </a>
+		</div>
+
+		<h2 class="page-heading"> Edit Page </h2>
+		<form class="new-Page" action="/admin/pages/edit/{{post.id}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+			<label class="input-label"> Title </label>
+			<input class="art-title" type="text" name="title" value="{{post.title}}" required>
+
+			<div class="portion">
+				<div class="portion-left">
+					<label class="input-label"> Body </label>
+					<textarea id="editor1" name="content" >{{post.content}}</textarea>
+				</div>
+
+				<div class="portion-right">
+					<label class="input-label"> Select Category </label>
+                    <select name="category" id="category" class="art-category" required>
+                        <option value=""> Select Category </option>
+                        {% for item in categories %}
+                            <option value="{{item.id}}"> {{item.name}} </option>
+                        {% endfor %}
+                    </select>
+
+                    <script>
+                        document.getElementById('category').value = '{{post.category.id}}';
+                    </script>
+
+                    <hr>
+
+					<label for="img" class="input-label">Select Image:</label>
+					<img class="image1" id="image1" src="{{post.image}}">
+				    <input type="file" id="img" name="image" accept="image/*" onchange="readURL(this);">
+
+                    <hr>
+
+                    <label class="input-label"> Image Publication Date </label>
+                    <input type="date" name="imageDate" class="form-control" value="{{post.imageDate|date:'Y-m-d'}}" required/>
+
+					<script>
+						function readURL(input) {
+				        if (input.files && input.files[0]) {
+				            var reader = new FileReader();
+
+				            reader.onload = function (e) {
+				                $('#image1')
+				                    .attr('src', e.target.result);
+				            };
+
+				            reader.readAsDataURL(input.files[0]);
+				        }
+				    }
+					</script>
+
+
+
+					<input name="edit-btn" class="publish" type="submit" value="Publish">
+
+
+				</div>
+			</div>
+			<!-- Portion ENd -->
+
+
+
+
+		</form>
+
+
+
+	</div>
+</div>
+
+
+<script src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
+<script src="/static/admin/js/ckeditor/ckeditor-custom.js"></script>
+
+
+
+{% endblock content %}

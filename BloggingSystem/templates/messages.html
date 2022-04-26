@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<script src="/static/js/chat.js"></script>
+
+<script>
+
+    setInterval(function () {
+        //document.getElementById('chatBox').innerHTML= "";
+        $.ajax({
+            type: "GET",
+            url: "/get-msgs",
+            data: {},
+            success: function( data, textStatus, jQxhr ){
+                for (const messge of data.messages.reverse()){
+                    
+                    if ($('#msg_' + messge.id).length <= 0) {
+                        appendMessage(messge.user.first_name, messge.usreInfo.image, messge.side, messge.content, messge.created, messge.id);
+                    }
+
+                    
+                } 
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            },
+        });
+    }, 1000);
+
+    function sendMsg() {
+        var msg = document.getElementById('msgBox').value;
+        $.ajax({
+            type: "POST",
+            url: "/messages/send",
+            data: {'msg' : msg, csrfmiddlewaretoken: '{{ csrf_token }}'},
+            success: function( data, textStatus, jQxhr ){
+                console.log( data.status );
+                if(data.status = 'success'){
+                    document.getElementById('msgBox').value = "";
+                }
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+            },
+        });
+    }
+</script>
+
+
+<div class="container">
+
+<section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> Chat Box
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+  
+    <main class="msger-chat" id="chatBox">
+
+    </main>
+  
+    <div class="msger-inputarea">
+        {% csrf_token %}
+      <input type="text" name="msg" id="msgBox" class="msger-input" placeholder="Enter your message...">
+      <input type="button" value="Send" class="msger-send-btn" onclick="sendMsg()">
+    </div>
+  </section>
+
+</div>
+
+
+<style>
+    footer{
+        display: none!important;
+    }
+</style>
+
+
+
+{% endblock content %}

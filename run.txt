@@ -1,0 +1,56 @@
+Open command prompt inside the folder...
+
+Python 3.10.2 and xampp is required.
+
+No run these two commands:
+pip install virtualenv
+virtualenv env
+
+Now, activate environment with this command:
+env\Scripts\activate
+
+
+Now, install django and dependencies with this command:
+pip install -r requirements.txt
+
+
+
+Now, go to xampp phpmyadmin and create databae named blogging
+
+
+Now, run these two commands to create data definitions automatically:
+python manage.py makemigrations
+python manage.py migrate
+
+
+Now, everthing is done, run server using this command:
+python manage.py runserver
+
+
+
+Server is up and running,
+access the webiste using the link provided...
+http://127.0.0.1:8000/
+
+
+Now, blog does not have any data...
+lets add data with the sql file
+
+Data is added...
+
+
+
+
+Only one thing left...
+
+Currently there is no admin...We can create admin with this command:
+python manage.py createsuperuser
+
+you can give any credentials
+Run server again and check,,
+
+
+
+
+
+

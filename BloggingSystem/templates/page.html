@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+    .content-box img{
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<div class="container">
+    <div class="row mt-3">
+        <!-- Content -->
+        <div class="col-md-9 pr-1">
+            <div class="content-box bg-white p-4">
+
+                <div class="article">
+                    <!-- Title -->
+                    <h1> {{post.title}} </h1>
+
+                    <!-- Date , category and Type -->
+                    <span class="post-date">
+                    <i class="fa fa-clock-o"> </i>  {{post.created}}
+                    </span>
+
+                    <ul class="links mb-3" style="display:inline-block;">
+                        <li class="cat">
+                            <a class="cat-link" href="/category/{{post.category}}" alt="View all posts" tabindex="0"> {{cat_Name}} </a>
+                        </li>
+                    </ul>
+
+                    <img src="{{post.image}}" alt="" width="100%">
+
+                    <div id="view" class="articles-body mt-4">
+                        {{post.content | safe}}
+                    </div>
+                </div>
+                <hr class="my-4">
+
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-3 pl-1">
+
+
+            <div class="content-box bg-white p-4 h-100">
+                <h4 class="section-heading m-0" style="margin-top:20px;">
+                <span class="heading-text ">Related Articles</span>
+                </h4>
+                <br>
+
+                {% if relatedPosts %}
+                    {% for post in relatedPosts %}
+                    <div class="card" style="width: 100%;">
+                        <a href="/pages/{{post.id}}" class="data-anchor">
+                            <img class="card-img-top" src="{{post.image}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <br>
+                    {% endfor %}
+
+                {% else %}
+                    <p>No Related Posts</p>
+                {% endif %}
+
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

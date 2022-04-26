@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="form-box">
+    <div class="box-header">
+        <h4 class="box-title">Register</h4>
+    </div>
+    <div class="box-body">
+        <form action="/doregister" method="post">
+            {% csrf_token %}
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input name="name" class="form-control" placeholder="Full name" type="text" required>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                </div>
+                <input name="email" class="form-control" placeholder="Email address" type="email" required>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input name="username" class="form-control" placeholder="User Name" type="text" required>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input name="pass1" class="form-control" placeholder="Create password" type="password" required>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input name="pass2" class="form-control" placeholder="Repeat password" type="password" required>
+            </div>
+            <!-- form-group// -->
+            <div class="form-group">
+                <button name="register" type="submit" class="btn btn-primary btn-block btn-lg box-button">Register</button>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer">Have an account? <a class="link-text" href="/accounts/login">Log In</a></div>
+</div>
+
+
+
+{% endblock content %}

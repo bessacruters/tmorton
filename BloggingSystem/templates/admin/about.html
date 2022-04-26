@@ -1,0 +1,31 @@
+{% extends 'admin/layout.html' %}
+
+{% block content %}
+
+<div id="content" class="content">
+    <div class="content-heading">
+		<span> Edit About Page </span>
+		<a class="view-webiste-button" href="/" target="_blank"> <i class="fa fa-external-link-alt" aria-hidden="true"></i> View Public Webiste </a>
+	</div>
+	<div class="content-body">
+		<div class="col-lg-12 p-0 my-2">
+            <form class="new-Page" action="/admin/about/save" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="">
+					<label class="input-label"> About Us Page Content </label>
+					<textarea id="editor1" name="content">{{aboutContent}}</textarea>
+				</div>
+
+                <input name="submit-btn" class="publish" type="submit" value="Publish">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
+<script src="/static/admin/js/ckeditor/ckeditor-custom.js"></script>
+
+
+{% endblock content %}

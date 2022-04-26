@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="form-box">
+    <div class="box-header">
+      <h4 class="box-title">Sign In</h4>
+    </div>
+    <div class="box-body">
+      <form action="/dologin" method="post">
+        {% csrf_token %}
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+         </div>
+            <input name="loginusername" class="form-control" placeholder="User name" type="text" required>
+        </div>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+            <input name="loginpass" class="form-control" placeholder="Password" type="password" required>
+        </div> 
+
+
+        <div class="form-group">
+          <button type="submit" name="login" class="btn btn-primary btn-block btn-lg box-button">Sign In</button>
+        </div>
+        <p class="hint-text"><a href="/">Forgot Password?</a></p>
+      </form>
+    </div>
+    <div class="box-footer">Don't have an account? <a class="link-text" href="/accounts/signup">Create one</a></div>
+  </div>
+
+
+  <style>
+      footer{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
+      }
+  </style>
+
+
+{% endblock content %}
